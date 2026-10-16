@@ -1,0 +1,13 @@
+{
+  "name": "file_share",
+  "version": "1.0.0",
+  "description": "Zero-cloud browser-to-browser WebRTC P2P file and text transfer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "ws": "^8.17.1"
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FileShare — Direct WebRTC P2P Transfer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo-icon">⚡</span>
+        <div>
+          <h1>FileShare</h1>
+          <p class="tagline">Local P2P File & Text Transfer</p>
+        </div>
+      </div>
+      <div class="user-status">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="user-alias" id="myAlias">Connecting...</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Peers Discovery Radar -->
+      <section class="section discovery-section">
+        <div class="section-header">
+          <h2>Discovered Devices</h2>
+          <span class="peer-count" id="peerCount">0 devices nearby</span>
+        </div>
+
+        <div class="peers-grid" id="peersGrid">
+          <div class="empty-state" id="emptyState">
+            <div class="radar-pulse"></div>
+            <p>Scanning local network for devices...</p>
+            <small>Open this page on another laptop, phone, or tablet on your Wi-Fi.</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Transfers -->
+      <section class="section transfer-section" id="transferSection" style="display: none;">
+        <div class="section-header">
+          <h2>Transfer Progress</h2>
+          <span class="transfer-rate" id="transferRate">0 MB/s</span>
+        </div>
+        <div class="transfer-card">
+          <div class="transfer-info">
+            <span class="transfer-filename" id="transferFileName">filename.dat</span>
+            <span class="transfer-percent" id="transferPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+          </div>
+          <div class="transfer-meta">
+            <span id="transferSize">0 / 0 MB</span>
+            <span id="transferEta">Calculating...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Text Message / Clipboard Drop -->
+      <section class="section text-share-section">
+        <div class="section-header">
+          <h2>Quick Text & Links</h2>
+        </div>
+        <div class="text-share-box">
+          <textarea id="textPayload" placeholder="Paste link, text snippet, or secret code here..." rows="2"></textarea>
+          <button id="sendTextBtn" class="btn btn-primary" disabled>Send to Selected Peer</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Hidden file input for file picker fallback -->
+    <input type="file" id="filePicker" multiple style="display: none;">
+
+    <!-- Inbound File Modal -->
+    <div class="modal-backdrop" id="inboundModal" style="display: none;">
+      <div class="modal">
+        <h3>Incoming File</h3>
+        <p><strong id="inboundPeer">Someone</strong> wants to send you:</p>
+        <div class="inbound-file-preview">
+          <span class="file-icon">📄</span>
+          <div>
+            <div class="inbound-name" id="inboundName">archive.zip</div>
+            <div class="inbound-size" id="inboundSize">45 MB</div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="declineBtn" class="btn btn-secondary">Decline</button>
+          <button id="acceptBtn" class="btn btn-primary">Accept & Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
